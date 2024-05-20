@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Image to PDF Converter</h1>
+      </header>
+      <div class="container">
+        <input type="file" id="fileInput" multiple>
+        <button style="--clr:#008cba;--hov:#006080;" id="addImageButton">Add Images</button>
+        <button style="--clr:#3e8d75;--hov:#3e8e41;" id="convertButton">Convert to PDF</button>
+        <button style="--clr:#f44336;--hov:#ff6b6b;" id="clearButton">Clear Images</button>
+        <div id="pdfDownloadLink"></div>
+        <div id="imageContainer"></div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+      <script src="script.js"></script>
+</body>
+</html>

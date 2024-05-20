@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  .container {
+    margin: 20px auto;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .imageBox {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    position: relative;
+  }
+  .imageBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .deleteButton:hover {
+    background-color: #ff6b6b;
+  }
+  #imageContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #imageContainer img {
+    max-width: 100%;
+  }
+  #pdfDownloadLink {
+    margin: 20px auto;
+    text-align:center;
+    background: "red";
+    width:100%;
+  }
+  
+  #fileInput {
+    display: none;
+  }
+  button{
+    border: none;
+    background: var(--clr);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px auto;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover{
+    background: var(--hov);
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    padding: 0;
+    right: 5px;
+  }
