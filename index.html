@@ -12,26 +12,35 @@
 <body>
   <div class="container">
     <h1>Image to PDF & PDF to Image Converter</h1>
-    <div class="tabs">
-      <button class="tab active" onclick="showTab('imageToPdf')">Image to PDF</button>
-      <button class="tab" onclick="showTab('pdfToImage')">PDF to Image</button>
+    <div class="tab-sec">
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('imageToPdf')">Image to PDF</button>
+        <button class="tab" onclick="showTab('pdfToImage')">PDF to Image</button>
+      </div>
     </div>
 
     <!-- Image to PDF Section -->
     <div id="imageToPdf" class="tab-content active">
-      <h2>Convert Images to PDF</h2>
+      <div class="input-bg">
       <input type="file" id="imageInput" accept="image/*" multiple>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABKElEQVR4nO2YXU7DMBCEZy8BqBdBrS1xd/JSntpKiJ8T4HoP0WpLolYlMUiYMoYdaRUrURJ/O+PICvDDesP8ygota4u7myzhycrGaFEJt9dZ4qNK3L1XeFUsZmgbIrYHsz3EKT7bxIfj6diO9DFLJ05kiS/W/QHEFvzRJWJn0giEnR9AbEwPkyYgzkGoYVIBYgyEFkYlbEqLeAzk/KOgEtf4bWUJDypxNfUlmgIx2T0GkSUswS4tgDQldRAyuSM19XHTN1ndZ88oXO+++h5cAOS+CRB8QxTPUIZJwEHIugl3hKybcEfIugl3hKybcEfIugl3hKyb4HGkK23zLzIPJflxoA7Syx2pLPVo9fJoVZZ6tHp5tCpLPVq9PFqVpR6tvxotJSn8B5A9F6gGvOMYIf0AAAAASUVORK5CYII=" alt="upload--v1">
+      <p>Choose Image</p>
+    </div>
       <div id="imagePreview" class="preview-container"></div>
       <button id="convertToPdf">Convert to PDF</button>
     </div>
 
     <!-- PDF to Image Section -->
     <div id="pdfToImage" class="tab-content">
-      <h2>Convert PDF to Images</h2>
+      <div class="input-bg">
       <input type="file" id="pdfInput" accept="application/pdf">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABKElEQVR4nO2YXU7DMBCEZy8BqBdBrS1xd/JSntpKiJ8T4HoP0WpLolYlMUiYMoYdaRUrURJ/O+PICvDDesP8ygota4u7myzhycrGaFEJt9dZ4qNK3L1XeFUsZmgbIrYHsz3EKT7bxIfj6diO9DFLJ05kiS/W/QHEFvzRJWJn0giEnR9AbEwPkyYgzkGoYVIBYgyEFkYlbEqLeAzk/KOgEtf4bWUJDypxNfUlmgIx2T0GkSUswS4tgDQldRAyuSM19XHTN1ndZ88oXO+++h5cAOS+CRB8QxTPUIZJwEHIugl3hKybcEfIugl3hKybcEfIugl3hKyb4HGkK23zLzIPJflxoA7Syx2pLPVo9fJoVZZ6tHp5tCpLPVq9PFqVpR6tvxotJSn8B5A9F6gGvOMYIf0AAAAASUVORK5CYII=" alt="upload--v1">
+      <p>Choose PDF</p>  
+    </div>
       <div id="pdfPreview" class="preview-container"></div>
     </div>
   </div>
-  <script src="/script.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
