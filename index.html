@@ -1,153 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khurshid's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to PDF & PDF to Image Converter</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.2/tailwind.min.css"></script>
 </head>
-<body class="main-bg">
-        <div id="navbar" class="navbar flex-row text-white main-bg">
-                <ul>
-                    <li><h3 id="aboutBtn">about-me</h3></li>
-                    <li><h1 id="homeBtn" class="text-pri">js</h1></li>
-                    <li><h3 id="portfolioBtn">portfolio</h3></li>
-                </ul>
-        </div>
-        <div id="home" class="home-body flex-col main-bg content active">
-            <div class="hero flex-row">
-                <div class="hero-img">
-                    <img src="hero-image.webp" alt="">
-                </div>
-                <div class="details flex-col">
-                    <h1>Hi, I'm <b class="text-pri">Khurshid</b></h1>
-                    <h3>Front-end Developer</h3>
-                    <p><b class="icons">📞</b> <a href="">+917086205604</a></p>
-                    <p><b class="icons">📧</b> <a href="">khurshidalom.it@gmail.com</a></p>
-                    <div class="flex-row social">
-                        <a href="https://github.com/bloggerkhurshid"><img src="github.svg" alt=""></a>
-                        <a href="https://www.linkedin.com/in/bloggerkhurshid/"><img src="linkedin.svg" alt=""></a>
-                        <a href="https://www.instagram.com/khurshid.io/"><img src="instagram.svg" alt=""></a>
-                        <a href="https://www.facebook.com/khurshid.io"><img src="facebook.svg" alt=""></a>
-                    </div>
-                </div>                
-            </div>
-        </div>
+<body class="bg-gray-100 font-sans">
 
-        <div id="about" class="about-me main-bg flex-col content">
-            <div class="cards flex-col">
-                <div class="card-row flex-row">
-                    <div class="card flex-col">
-                        <div class="card-nav">
-                            <div class="card-icons">
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                            </div>
-                            <div class="card-title"><p>About-Me</p></div>
-                        </div>
-                        <div class="card-info">
-                            <p>I am a front-end web developer with 1 year of freelance experience, skilled in HTML, CSS, JavaScript, and React.js. I am seeking opportunities to apply my skills, contribute to projects, and grow professionally. I am enthusiastic about exploring new technologies and staying updated with the latest industry trends.</p>
-                        </div>
-                    </div>
-                    <div class="card flex-col">
-                        <div class="card-nav">
-                            <div class="card-icons">
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                            </div>
-                            <div class="card-title"><p>Skills</p></div>
-                        </div>
-                        <div class="card-info">
-                            <p><b>Languages:</b> HTML5, CSS3, JavaScript</p>
-                            <p><b>Version Control Tools: </b>Git, GitHub</p>
-                            <p><b>Frameworks/Libraries: </b>ReactJS, Redux Toolkit, React Query, Tailwind CSS</p>
-                            <p><b>Database:</b> MySQL, MongoDB, DB2</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-row flex-row">
-                    <div class="card flex-col">
-                        <div class="card-nav">
-                            <div class="card-icons">
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                            </div>
-                            <div class="card-title"><p>Education</p></div>
-                        </div>
-                        <div class="card-info">
-                            <p><b>Course: </b>Bachelor of Computer Applications (BCA)</p>
-                            <p><b>College:</b> B.N College, Dhubri</p>
-                            <p><b>Session: </b>2020-2023</p>
-                            <p><b>CGPA: </b>6.69</p>
-                            <p><b>University:</b> Gauhati University, Guwahati</p>
-                        </div>
-                    </div>
-                    <div class="card flex-col">
-                        <div class="card-nav">
-                            <div class="card-icons">
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                                <div class="nav-icon"></div>
-                            </div>
-                            <div class="card-title"><p>Contact-Info</p></div>
-                        </div>
-                        <div class="card-info">
-                            <p><b>Phone: </b>+91-7086205604</p>
-                            <p><b>Email: </b>khurshidalom.it@gmail.com</p>
-                            <p><b>Instagram: </b><a href="https://www.instagram.com/khurshid.io">khurshid.io</a></p>
-                            <p><b>Facebook: </b><a href="https://www.facebook.com/khurshid.io">khurshid.io</a></p>
-                            <p><b>LinkedIn: </b><a href="https://www.linkedin.com/in/bloggerkhurshid/">bloggerkhurshid</a></p>
-                            <p><b>GitHub: </b><a href="https://github.com/bloggerkhurshid">bloggerkhurshid</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="portfolio" class="portfolio flex-col content">
-                <div class="projects">
-                    <div class="project-row">
-                        <div class="pro-card tinder">
-                            <div class="pro-details">
-                                <h1>Tinder Clone</h1>
-                                <p>Tinder clone using HTML, CSS, and JavaScript, featuring smooth animations for a seamless user experience. The application includes the core visual and interactive functionalities of Tinder, such as user profiles and swiping animations.</p>
-                                <a href="https://khurshidalom.me/tinder-clone/">Live Demo</a>   
-                            </div>
-                        </div>
-                        <div class="pro-card youtube">
-                            <div class="pro-details">
-                                <h1>YouTube Clone</h1>
-                                <p>YouTube clone app using React and the YouTube API. The application replicates the core features of YouTube, allowing users to search for videos, view video details, and watch videos within the app.</p>
-                                <a href="">Live Demo</a>   
-                            </div>
-                        </div>
-                        <div class="pro-card porto">
-                            <div class="pro-details">
-                                <h1>Image to PDF Converter</h1>
-                                <p>Minimal and simple portfolio website using HTML, CSS, and JavaScript. The website serves as a showcase of my projects, skills, and professional background.</p>
-                                <a href="https://khurshidalom.me/Pdf-Converter/">Live Demo</a>   
-                            </div>
-                        </div>
-                        <div class="pro-card weather">
-                            <div class="pro-details">
-                                <h1>React Weather App</h1>
-                                <p>Weather web app using HTML, CSS, JavaScript, React, and a weather API. The application provides real-time weather information for various locations with a clean and intuitive interface.</p>
-                                <a href="">Live Demo</a>   
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer flex-row main-bg">
-            <p>designed by <a href="https://github.com/bloggerkhurshid">khurshid.io</a></p>
-        </div>
+  <div class="container mx-auto py-10">
+    <h1 class="text-2xl font-bold text-center mb-8">Image to PDF & PDF to Image Converter</h1>
+    
+    <!-- Image to PDF -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-lg font-semibold mb-4">Convert Images to PDF</h2>
+      <input type="file" id="imageInput" accept="image/*" multiple class="block mb-4 p-2 border rounded">
+      <div id="imagePreview" class="flex gap-4 flex-wrap mb-4"></div>
+      <button id="convertToPdf" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Convert to PDF</button>
+    </div>
 
-<script src="script.js"></script>
+    <!-- PDF to Image -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-lg font-semibold mb-4">Convert PDF to Images</h2>
+      <input type="file" id="pdfInput" accept="application/pdf" class="block mb-4 p-2 border rounded">
+      <div id="pdfPreview" class="grid grid-cols-1 gap-4"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
