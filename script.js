@@ -1,99 +1,74 @@
-const imageContainer = document.getElementById('imageContainer');
-const convertButton = document.getElementById('convertButton');
-const clearButton = document.getElementById('clearButton');
-const pdfDownloadLink = document.getElementById('pdfDownloadLink');
-let imageFiles = [];
-window.jsPDF = window.jspdf.jsPDF;
+// Import jsPDF from jspdf
+const { jsPDF } = window.jspdf;
 
-// Function to render the images in the UI
-const renderImages = () => {
-  imageContainer.innerHTML = '';
-  imageFiles.forEach((file,index) => {
+// Image to PDF
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+const convertToPdfButton = document.getElementById('convertToPdf');
+
+let images = [];
+
+// Preview Images
+imageInput.addEventListener('change', (e) => {
+  images = [];
+  imagePreview.innerHTML = '';
+  Array.from(e.target.files).forEach((file, index) => {
     const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = document.createElement('img');
+      img.src = event.target.result;
+      img.alt = `Image ${index + 1}`;
+      img.className = 'w-24 h-24 object-cover border rounded';
+      imagePreview.appendChild(img);
+      images.push(event.target.result);
+    };
     reader.readAsDataURL(file);
-    reader.onload = () => {
-    const imageBox = document.createElement('div');
-      imageBox.classList.add('imageBox');
-      imageBox.setAttribute('data-index', index);
-      imageBox.innerHTML = `
-        <img src="${reader.result}">
-        <button class="deleteButton" data-index="${index}">&times;</button>
-      `;
-    imageContainer.appendChild(imageBox);
-    }
   });
-};
-
-function deleteImage(index) {
-  imageFiles.splice(index, 1);
-  renderImages();
-}
-
-
-imageContainer.addEventListener('click', (event) => {
-  if (event.target.classList.contains('deleteButton')) {
-    const index = parseInt(event.target.dataset.index);
-    deleteImage(index);
-  }
 });
 
+// Convert to PDF
+convertToPdfButton.addEventListener('click', () => {
+  if (images.length === 0) {
+    alert('Please upload at least one image.');
+    return;
+  }
 
-// Function to handle the conversion process
-const convertToPdf = () => {
-  const doc = new jsPDF();
-  let imagesProcessed = 0;
-  const pageWidth = doc.internal.pageSize.getWidth() - 20;
-  imageFiles.forEach((file, index) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
+  const pdf = new jsPDF();
+  images.forEach((image, index) => {
+    if (index > 0) pdf.addPage();
+    pdf.addImage(image, 'JPEG', 10, 10, 180, 150);
+  });
+  pdf.save('converted.pdf');
+});
+
+// PDF to Image
+const pdfInput = document.getElementById('pdfInput');
+const pdfPreview = document.getElementById('pdfPreview');
+
+pdfInput.addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const fileReader = new FileReader();
+  fileReader.onload = async function () {
+    const pdfData = new Uint8Array(this.result);
+
+    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+
+    pdfPreview.innerHTML = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+
+      const viewport = page.getViewport({ scale: 1.5 });
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const scaleFactor = pageWidth / img.width;
-        const imageHeight = img.height * scaleFactor;
-        canvas.width = img.width;
-        canvas.height = img.height;
-        context.drawImage(img, 0, 0, img.width, img.height);
-        const imageData = canvas.toDataURL('image/jpeg');
-        if (index === 0) {
-          doc.addImage(imageData, 'JPEG', 10, 10, pageWidth, imageHeight);
-        } else {
-          doc.addPage();
-          doc.addImage(imageData, 'JPEG', 10, 10, pageWidth, imageHeight);
-        }
-        imagesProcessed++;
-        if (imagesProcessed === imageFiles.length) {
-          doc.save('converted.pdf');
-          pdfDownloadLink.innerHTML = `<a href="${doc.output('bloburl')}">Download PDF</a>`;
-        }
-      };
-    };
-  });
-};
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
 
-// Add event listener to the file input element
-const fileInput = document.getElementById('fileInput');
-fileInput.addEventListener('change', (e) => {
-const selectedFiles = Array.from(e.target.files);
-imageFiles = imageFiles.concat(selectedFiles);
-renderImages();
+      await page.render({ canvasContext: context, viewport }).promise;
+
+      pdfPreview.appendChild(canvas);
+    }
+  };
+  fileReader.readAsArrayBuffer(file);
 });
-
-// Add event listener to the convert button
-convertButton.addEventListener('click', () => {
-    convertButton.innerHTML = 'Converting...'
-  convertButton.disabled=true
-convertToPdf();
-    convertButton.innerHTML = 'Convert to PDF'
-  convertButton.disabled=false
-});
-
-document.querySelector('#addImageButton').addEventListener('click',()=>fileInput.click())
-
-clearButton.addEventListener('click',()=>{
-  imageFiles=[]
-  renderImages()
-})
