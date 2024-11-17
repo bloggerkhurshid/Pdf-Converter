@@ -11,27 +11,27 @@
 </head>
 <body>
   <div class="container">
-    <h1>File Converter</h1>
-
+    <h1>Image to PDF & PDF to Image Converter</h1>
     <div class="tabs">
-      <button class="tab-button active" data-target="image-to-pdf">Image to PDF</button>
-      <button class="tab-button" data-target="pdf-to-image">PDF to Image</button>
+      <button class="tab active" onclick="showTab('imageToPdf')">Image to PDF</button>
+      <button class="tab" onclick="showTab('pdfToImage')">PDF to Image</button>
     </div>
 
-    <div id="image-to-pdf" class="tab-content active">
+    <!-- Image to PDF Section -->
+    <div id="imageToPdf" class="tab-content active">
       <h2>Convert Images to PDF</h2>
       <input type="file" id="imageInput" accept="image/*" multiple>
       <div id="imagePreview" class="preview-container"></div>
       <button id="convertToPdf">Convert to PDF</button>
     </div>
 
-    <div id="pdf-to-image" class="tab-content">
+    <!-- PDF to Image Section -->
+    <div id="pdfToImage" class="tab-content">
       <h2>Convert PDF to Images</h2>
       <input type="file" id="pdfInput" accept="application/pdf">
       <div id="pdfPreview" class="preview-container"></div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
