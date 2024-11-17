@@ -4,31 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image to PDF & PDF to Image Converter</title>
-  <!-- Include Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Include jsPDF -->
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- Include PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js"></script>
 </head>
-<body class="bg-gray-100 font-sans">
+<body>
+  <div class="container">
+    <h1>File Converter</h1>
 
-  <div class="container mx-auto py-10">
-    <h1 class="text-2xl font-bold text-center mb-8">Image to PDF & PDF to Image Converter</h1>
-    
-    <!-- Image to PDF -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h2 class="text-lg font-semibold mb-4">Convert Images to PDF</h2>
-      <input type="file" id="imageInput" accept="image/*" multiple class="block mb-4 p-2 border rounded">
-      <div id="imagePreview" class="flex gap-4 flex-wrap mb-4"></div>
-      <button id="convertToPdf" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Convert to PDF</button>
+    <div class="tabs">
+      <button class="tab-button active" data-target="image-to-pdf">Image to PDF</button>
+      <button class="tab-button" data-target="pdf-to-image">PDF to Image</button>
     </div>
 
-    <!-- PDF to Image -->
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <h2 class="text-lg font-semibold mb-4">Convert PDF to Images</h2>
-      <input type="file" id="pdfInput" accept="application/pdf" class="block mb-4 p-2 border rounded">
-      <div id="pdfPreview" class="grid grid-cols-1 gap-4"></div>
+    <div id="image-to-pdf" class="tab-content active">
+      <h2>Convert Images to PDF</h2>
+      <input type="file" id="imageInput" accept="image/*" multiple>
+      <div id="imagePreview" class="preview-container"></div>
+      <button id="convertToPdf">Convert to PDF</button>
+    </div>
+
+    <div id="pdf-to-image" class="tab-content">
+      <h2>Convert PDF to Images</h2>
+      <input type="file" id="pdfInput" accept="application/pdf">
+      <div id="pdfPreview" class="preview-container"></div>
     </div>
   </div>
 
