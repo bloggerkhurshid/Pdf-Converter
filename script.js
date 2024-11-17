@@ -1,74 +1,103 @@
-// Import jsPDF from jspdf
-const { jsPDF } = window.jspdf;
+// Image to PDF Functionality
+document.getElementById('convertToPdf').addEventListener('click', function () {
+  const imageInput = document.getElementById('imageInput');
+  const images = imageInput.files;
 
-// Image to PDF
-const imageInput = document.getElementById('imageInput');
-const imagePreview = document.getElementById('imagePreview');
-const convertToPdfButton = document.getElementById('convertToPdf');
+  if (images.length === 0) {
+    alert('Please select at least one image.');
+    return;
+  }
 
-let images = [];
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
 
-// Preview Images
-imageInput.addEventListener('change', (e) => {
-  images = [];
+  Array.from(images).forEach((image, index) => {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = new Image();
+      img.src = event.target.result;
+
+      img.onload = function () {
+        const imgWidth = pdf.internal.pageSize.getWidth();
+        const imgHeight = (img.height * imgWidth) / img.width;
+
+        if (index !== 0) pdf.addPage();
+        pdf.addImage(img, 'JPEG', 0, 0, imgWidth, imgHeight);
+
+        if (index === images.length - 1) {
+          pdf.save('converted.pdf');
+        }
+      };
+    };
+    reader.readAsDataURL(image);
+  });
+});
+
+// Image Preview for Image to PDF
+document.getElementById('imageInput').addEventListener('change', function () {
+  const imagePreview = document.getElementById('imagePreview');
   imagePreview.innerHTML = '';
-  Array.from(e.target.files).forEach((file, index) => {
+
+  Array.from(this.files).forEach(file => {
     const reader = new FileReader();
     reader.onload = function (event) {
       const img = document.createElement('img');
       img.src = event.target.result;
-      img.alt = `Image ${index + 1}`;
-      img.className = 'w-24 h-24 object-cover border rounded';
+      img.style.width = '100px';
+      img.style.height = '100px';
+      img.style.objectFit = 'cover';
+      img.style.border = '1px solid #ccc';
+      img.style.borderRadius = '5px';
+      img.style.marginRight = '10px';
       imagePreview.appendChild(img);
-      images.push(event.target.result);
     };
     reader.readAsDataURL(file);
   });
 });
 
-// Convert to PDF
-convertToPdfButton.addEventListener('click', () => {
-  if (images.length === 0) {
-    alert('Please upload at least one image.');
+// PDF to Image Functionality
+document.getElementById('pdfInput').addEventListener('change', function () {
+  const pdfPreview = document.getElementById('pdfPreview');
+  pdfPreview.innerHTML = '';
+
+  const file = this.files[0];
+  if (!file) {
+    alert('Please select a PDF file.');
     return;
   }
 
-  const pdf = new jsPDF();
-  images.forEach((image, index) => {
-    if (index > 0) pdf.addPage();
-    pdf.addImage(image, 'JPEG', 10, 10, 180, 150);
-  });
-  pdf.save('converted.pdf');
-});
-
-// PDF to Image
-const pdfInput = document.getElementById('pdfInput');
-const pdfPreview = document.getElementById('pdfPreview');
-
-pdfInput.addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
   const fileReader = new FileReader();
-  fileReader.onload = async function () {
-    const pdfData = new Uint8Array(this.result);
+  fileReader.onload = function () {
+    const pdfData = new Uint8Array(fileReader.result);
+    const loadingTask = pdfjsLib.getDocument({ data: pdfData });
 
-    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+    loadingTask.promise
+      .then(pdf => {
+        for (let i = 1; i <= pdf.numPages; i++) {
+          pdf.getPage(i).then(page => {
+            const viewport = page.getViewport({ scale: 1.5 });
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
 
-    pdfPreview.innerHTML = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
 
-      const viewport = page.getViewport({ scale: 1.5 });
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
 
-      await page.render({ canvasContext: context, viewport }).promise;
-
-      pdfPreview.appendChild(canvas);
-    }
+            page.render(renderContext).promise.then(() => {
+              pdfPreview.appendChild(canvas);
+            });
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error loading PDF:', error);
+        alert('Failed to process PDF.');
+      });
   };
+
   fileReader.readAsArrayBuffer(file);
 });
