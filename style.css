@@ -19,8 +19,8 @@ body {
   display: flex;
   padding: 0px;
   flex-direction: column;
-  padding-top: 10%;
   align-items: center;
+  justify-content: center;
 }
 
 /* Header */
@@ -88,6 +88,7 @@ input[type="file"] {
   margin: 15px 0;
   position: absolute;
   width: 100%;
+  z-index: 99;
   opacity: 0;
   background-color: #f9f9f9;
   padding: 10px;
@@ -154,7 +155,6 @@ button:hover {
 
 /* Image Download Button */
 .download-button {
-  margin-top: 15px;
   background-color: #ff0040;
   color: #fff;
   padding: 12px 20px;
@@ -170,9 +170,28 @@ button:hover {
   background-color: #eb013c;
 }
 
+.nav{
+  height: 70px;
+  width: 100%;
+  background-color: #ff0040;
+  color: white;
+  display: flex;
+  align-items: center;
+  top: 0%;
+  justify-content: center;
+  position: fixed;
+}
+
+.nav h1{
+  color: white;
+  margin-bottom: 0px;
+}
+
 
 @media only screen and (max-width: 1024px) {
   .input-bg{
     width: 70vw;
   }
+
+
 }
